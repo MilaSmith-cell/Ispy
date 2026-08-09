@@ -6,9 +6,9 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const SCENE_PATH = "assets/scene.png";
 
 const colorNames = {
-  yellow: "ЖЁЛТОЕ", white: "БЕЛОЕ", brown: "КОРИЧНЕВОЕ",
-  pink: "РОЗОВОЕ", blue: "СИНЕЕ", green: "ЗЕЛЁНОЕ",
-  purple: "ФИОЛЕТОВОЕ", orange: "ОРАНЖЕВОЕ", red: "КРАСНОЕ"
+  yellow: "YELLOW", white: "WHITE", brown: "BROWN",
+  pink: "PINK", blue: "BLUE", green: "GREEN",
+  purple: "PURPLE", orange: "ORANGE", red: "RED"
 };
 
 // All coordinates use the source image coordinate system: 1408 x 768.
