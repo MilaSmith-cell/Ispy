@@ -1,32 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#8bcf32">
-  <title>I Spy With My Little Eye</title>
+  <title>Я вижу своим зорким глазом</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="game-shell">
     <header class="game-header">
       <div class="question-card" id="questionCard" aria-live="polite">
-        <span class="question-lead">I spy with my little eye something...</span>
-        <span class="color-word" id="colorWord">YELLOW!</span>
+        <span class="question-lead">Я вижу своим зорким глазом что-то...</span>
+        <span class="color-word" id="colorWord">ЖЁЛТОЕ!</span>
       </div>
       <div class="status-bar">
-        <span class="progress" id="progress">Found: 0 / 26</span>
+        <span class="progress" id="progress">Найдено: 0 / 26</span>
         <button class="sound-button" id="soundButton" type="button" aria-pressed="true">
           <span aria-hidden="true" id="soundIcon">🔊</span>
-          <span id="soundLabel">Music &amp; sound on</span>
+          <span id="soundLabel">Музыка и звук включены</span>
         </button>
       </div>
     </header>
 
-    <section class="scene-frame" aria-label="I Spy picture">
+    <section class="scene-frame" aria-label="Игровая картинка «Я вижу»">
       <div class="scene" id="scene">
-        <img id="sceneImage" src="assets/scene.png" alt="A colorful woodland scene with animals, fruit, flowers and a pond" draggable="false">
-        <svg id="gameOverlay" class="game-overlay" viewBox="0 0 1408 768" preserveAspectRatio="xMidYMid meet" aria-label="Selectable objects">
+        <img id="sceneImage" src="assets/scene.png" alt="Красочная лесная поляна с животными, фруктами, цветами и прудом" draggable="false">
+        <svg id="gameOverlay" class="game-overlay" viewBox="0 0 1408 768" preserveAspectRatio="xMidYMid meet" aria-label="Предметы, которые можно выбрать">
           <defs id="svgDefs">
             <filter id="grayscale-filter">
               <feColorMatrix type="saturate" values="0"></feColorMatrix>
@@ -36,29 +36,29 @@
           <g id="hotspotLayer"></g>
           <g id="debugLabelLayer" aria-hidden="true"></g>
         </svg>
-        <div class="loading" id="loading" role="status">Loading the picture…</div>
+        <div class="loading" id="loading" role="status">Загружаем картинку…</div>
       </div>
     </section>
 
-    <p class="helper-text">Look carefully and tap an object that matches the color!</p>
+    <p class="helper-text">Посмотри внимательно и нажми на предмет подходящего цвета!</p>
   </main>
 
   <div class="modal-backdrop" id="letterModal" hidden>
     <section class="letter-dialog" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
-      <button class="close-button" id="closeModal" type="button" aria-label="Close">×</button>
-      <p class="letter-title" id="letterTitle">Name this letter!</p>
+      <button class="close-button" id="closeModal" type="button" aria-label="Закрыть">×</button>
+      <p class="letter-title" id="letterTitle">Назови эту букву!</p>
       <div class="letter" id="letter" aria-live="assertive">A</div>
-      <p class="letter-hint">Say it out loud, then close the window.</p>
+      <p class="letter-hint">Произнеси её вслух, а затем закрой окно.</p>
     </section>
   </div>
 
   <div class="modal-backdrop" id="winModal" hidden>
     <section class="win-dialog" role="dialog" aria-modal="true" aria-labelledby="winTitle">
       <div class="stars" aria-hidden="true">★ ✦ ★</div>
-      <h1 id="winTitle">Great job!</h1>
-      <p>You found everything!</p>
-      <p class="win-score" id="winScore">26 objects</p>
-      <button class="play-again" id="playAgain" type="button">Play again</button>
+      <h1 id="winTitle">Отличная работа!</h1>
+      <p>Ты нашёл все предметы!</p>
+      <p class="win-score" id="winScore">Найдено предметов: 26</p>
+      <button class="play-again" id="playAgain" type="button">Играть ещё раз</button>
     </section>
   </div>
 

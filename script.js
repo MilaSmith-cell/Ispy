@@ -5,34 +5,40 @@ const DEBUG = false;
 const SVG_NS = "http://www.w3.org/2000/svg";
 const SCENE_PATH = "assets/scene.png";
 
+const colorNames = {
+  yellow: "ЖЁЛТОЕ", white: "БЕЛОЕ", brown: "КОРИЧНЕВОЕ",
+  pink: "РОЗОВОЕ", blue: "СИНЕЕ", green: "ЗЕЛЁНОЕ",
+  purple: "ФИОЛЕТОВОЕ", orange: "ОРАНЖЕВОЕ", red: "КРАСНОЕ"
+};
+
 // All coordinates use the source image coordinate system: 1408 x 768.
 const objects = [
-  { id: "sun", letter: "A", color: "yellow", label: "sun", shape: "circle", coords: { cx: 245, cy: 82, r: 66 } },
-  { id: "cloud", letter: "B", color: "white", label: "white cloud", shape: "ellipse", coords: { cx: 124, cy: 71, rx: 65, ry: 34 } },
-  { id: "owl", letter: "C", color: "brown", label: "owl", shape: "ellipse", coords: { cx: 556, cy: 248, rx: 31, ry: 42 } },
-  { id: "acorn", letter: "D", color: "brown", label: "acorn", shape: "ellipse", coords: { cx: 539, cy: 91, rx: 17, ry: 24 }, rotate: -35 },
-  { id: "pink-bird", letter: "E", color: "pink", label: "pink bird", shape: "ellipse", coords: { cx: 1233, cy: 185, rx: 48, ry: 34 } },
-  { id: "blue-bird", letter: "F", color: "blue", label: "blue bird", shape: "ellipse", coords: { cx: 1000, cy: 137, rx: 45, ry: 32 }, rotate: -12 },
-  { id: "green-bird", letter: "G", color: "green", label: "green bird", shape: "ellipse", coords: { cx: 1128, cy: 131, rx: 43, ry: 29 }, rotate: 8 },
-  { id: "dragonfly", letter: "H", color: "blue", label: "dragonfly", shape: "ellipse", coords: { cx: 574, cy: 342, rx: 39, ry: 25 }, rotate: 35 },
-  { id: "frog", letter: "I", color: "green", label: "frog", shape: "ellipse", coords: { cx: 675, cy: 528, rx: 49, ry: 42 } },
-  { id: "purple-fish", letter: "J", color: "purple", label: "purple fish", shape: "ellipse", coords: { cx: 521, cy: 583, rx: 44, ry: 24 } },
-  { id: "orange-fish", letter: "K", color: "orange", label: "orange fish", shape: "ellipse", coords: { cx: 679, cy: 621, rx: 43, ry: 23 } },
-  { id: "blue-fish", letter: "L", color: "blue", label: "blue fish", shape: "ellipse", coords: { cx: 806, cy: 588, rx: 43, ry: 24 } },
-  { id: "lizard", letter: "M", color: "green", label: "lizard", shape: "polygon", coords: { points: "964,467 992,460 1027,471 1057,490 1080,529 1070,559 1044,549 1036,521 1005,509 975,500" } },
-  { id: "grasshopper", letter: "N", color: "green", label: "grasshopper", shape: "polygon", coords: { points: "1145,543 1174,539 1208,554 1240,575 1212,593 1170,579 1145,566" } },
-  { id: "orange-butterfly", letter: "O", color: "orange", label: "orange butterfly", shape: "ellipse", coords: { cx: 184, cy: 407, rx: 30, ry: 27 }, rotate: 25 },
-  { id: "pink-butterfly", letter: "P", color: "pink", label: "pink butterfly", shape: "ellipse", coords: { cx: 1037, cy: 605, rx: 35, ry: 31 }, rotate: -12 },
-  { id: "blue-butterfly", letter: "Q", color: "blue", label: "blue butterfly", shape: "ellipse", coords: { cx: 1265, cy: 507, rx: 30, ry: 25 }, rotate: -30 },
-  { id: "red-apple", letter: "R", color: "red", label: "red apple", shape: "circle", coords: { cx: 880, cy: 196, r: 20 } },
-  { id: "yellow-pear", letter: "S", color: "yellow", label: "yellow pear", shape: "ellipse", coords: { cx: 1101, cy: 238, rx: 23, ry: 31 } },
-  { id: "pink-raspberry", letter: "T", color: "pink", label: "pink raspberry", shape: "ellipse", coords: { cx: 106, cy: 627, rx: 24, ry: 24 } },
-  { id: "blue-blackberry", letter: "U", color: "blue", label: "blue blackberry", shape: "circle", coords: { cx: 275, cy: 647, r: 21 } },
-  { id: "strawberry", letter: "V", color: "red", label: "strawberry", shape: "ellipse", coords: { cx: 1253, cy: 694, rx: 20, ry: 24 }, rotate: -16 },
-  { id: "blueberry", letter: "W", color: "blue", label: "blueberry", shape: "circle", coords: { cx: 1102, cy: 700, r: 20 } },
-  { id: "yellow-flower", letter: "X", color: "yellow", label: "yellow flower", shape: "circle", coords: { cx: 748, cy: 455, r: 22 } },
-  { id: "red-flower", letter: "Y", color: "red", label: "red flower", shape: "circle", coords: { cx: 737, cy: 692, r: 18 } },
-  { id: "orange-squirrel", letter: "Z", color: "orange", label: "orange squirrel", shape: "polygon", coords: { points: "252,415 286,403 322,423 340,385 379,389 406,431 403,492 373,528 321,528 280,500 250,458" } }
+  { id: "sun", letter: "A", color: "yellow", label: "солнце", shape: "circle", coords: { cx: 245, cy: 82, r: 66 } },
+  { id: "cloud", letter: "B", color: "white", label: "белое облако", shape: "ellipse", coords: { cx: 124, cy: 71, rx: 65, ry: 34 } },
+  { id: "owl", letter: "C", color: "brown", label: "сова", shape: "ellipse", coords: { cx: 556, cy: 248, rx: 31, ry: 42 } },
+  { id: "acorn", letter: "D", color: "brown", label: "жёлудь", shape: "ellipse", coords: { cx: 539, cy: 91, rx: 17, ry: 24 }, rotate: -35 },
+  { id: "pink-bird", letter: "E", color: "pink", label: "розовая птица", shape: "ellipse", coords: { cx: 1233, cy: 185, rx: 48, ry: 34 } },
+  { id: "blue-bird", letter: "F", color: "blue", label: "синяя птица", shape: "ellipse", coords: { cx: 1000, cy: 137, rx: 45, ry: 32 }, rotate: -12 },
+  { id: "green-bird", letter: "G", color: "green", label: "зелёная птица", shape: "ellipse", coords: { cx: 1128, cy: 131, rx: 43, ry: 29 }, rotate: 8 },
+  { id: "dragonfly", letter: "H", color: "blue", label: "стрекоза", shape: "ellipse", coords: { cx: 574, cy: 342, rx: 39, ry: 25 }, rotate: 35 },
+  { id: "frog", letter: "I", color: "green", label: "лягушка", shape: "ellipse", coords: { cx: 675, cy: 528, rx: 49, ry: 42 } },
+  { id: "purple-fish", letter: "J", color: "purple", label: "фиолетовая рыба", shape: "ellipse", coords: { cx: 521, cy: 583, rx: 44, ry: 24 } },
+  { id: "orange-fish", letter: "K", color: "orange", label: "оранжевая рыба", shape: "ellipse", coords: { cx: 679, cy: 621, rx: 43, ry: 23 } },
+  { id: "blue-fish", letter: "L", color: "blue", label: "синяя рыба", shape: "ellipse", coords: { cx: 806, cy: 588, rx: 43, ry: 24 } },
+  { id: "lizard", letter: "M", color: "green", label: "ящерица", shape: "polygon", coords: { points: "964,467 992,460 1027,471 1057,490 1080,529 1070,559 1044,549 1036,521 1005,509 975,500" } },
+  { id: "grasshopper", letter: "N", color: "green", label: "кузнечик", shape: "polygon", coords: { points: "1145,543 1174,539 1208,554 1240,575 1212,593 1170,579 1145,566" } },
+  { id: "orange-butterfly", letter: "O", color: "orange", label: "оранжевая бабочка", shape: "ellipse", coords: { cx: 184, cy: 407, rx: 30, ry: 27 }, rotate: 25 },
+  { id: "pink-butterfly", letter: "P", color: "pink", label: "розовая бабочка", shape: "ellipse", coords: { cx: 1037, cy: 605, rx: 35, ry: 31 }, rotate: -12 },
+  { id: "blue-butterfly", letter: "Q", color: "blue", label: "синяя бабочка", shape: "ellipse", coords: { cx: 1265, cy: 507, rx: 30, ry: 25 }, rotate: -30 },
+  { id: "red-apple", letter: "R", color: "red", label: "красное яблоко", shape: "circle", coords: { cx: 880, cy: 196, r: 20 } },
+  { id: "yellow-pear", letter: "S", color: "yellow", label: "жёлтая груша", shape: "ellipse", coords: { cx: 1101, cy: 238, rx: 23, ry: 31 } },
+  { id: "pink-raspberry", letter: "T", color: "pink", label: "розовая малина", shape: "ellipse", coords: { cx: 106, cy: 627, rx: 24, ry: 24 } },
+  { id: "blue-blackberry", letter: "U", color: "blue", label: "синяя ежевика", shape: "circle", coords: { cx: 275, cy: 647, r: 21 } },
+  { id: "strawberry", letter: "V", color: "red", label: "клубника", shape: "ellipse", coords: { cx: 1253, cy: 694, rx: 20, ry: 24 }, rotate: -16 },
+  { id: "blueberry", letter: "W", color: "blue", label: "черника", shape: "circle", coords: { cx: 1102, cy: 700, r: 20 } },
+  { id: "yellow-flower", letter: "X", color: "yellow", label: "жёлтый цветок", shape: "circle", coords: { cx: 748, cy: 455, r: 22 } },
+  { id: "red-flower", letter: "Y", color: "red", label: "красный цветок", shape: "circle", coords: { cx: 737, cy: 692, r: 18 } },
+  { id: "orange-squirrel", letter: "Z", color: "orange", label: "оранжевая белка", shape: "polygon", coords: { points: "252,415 286,403 322,423 340,385 379,389 406,431 403,492 373,528 321,528 280,500 250,458" } }
 ];
 
 const state = {
@@ -108,7 +114,7 @@ function renderHotspots() {
     hotspot.dataset.color = object.color;
     hotspot.setAttribute("role", "button");
     hotspot.setAttribute("tabindex", "0");
-    hotspot.setAttribute("aria-label", `Select ${object.label}`);
+    hotspot.setAttribute("aria-label", `Выбрать: ${object.label}`);
     els.hotspotLayer.append(hotspot);
 
     if (DEBUG) {
@@ -167,7 +173,7 @@ function chooseNextColor() {
   }
   const alternatives = available.filter((color) => color !== state.currentColor);
   state.currentColor = randomItem(alternatives.length ? alternatives : available);
-  els.colorWord.textContent = `${state.currentColor.toUpperCase()}!`;
+  els.colorWord.textContent = `${colorNames[state.currentColor]}!`;
 }
 
 function handleObjectSelection(objectId) {
@@ -283,7 +289,7 @@ function renderFoundOverlay(object) {
 }
 
 function updateProgress() {
-  els.progress.textContent = `Found: ${state.foundIds.size} / ${objects.length}`;
+  els.progress.textContent = `Найдено: ${state.foundIds.size} / ${objects.length}`;
 }
 
 function ensureAudioContext() {
@@ -328,7 +334,7 @@ function toggleSound() {
   state.soundEnabled = !state.soundEnabled;
   els.soundButton.setAttribute("aria-pressed", String(state.soundEnabled));
   els.soundIcon.textContent = state.soundEnabled ? "🔊" : "🔇";
-  els.soundLabel.textContent = state.soundEnabled ? "Music & sound on" : "Music & sound off";
+  els.soundLabel.textContent = state.soundEnabled ? "Музыка и звук включены" : "Музыка и звук выключены";
   if (state.soundEnabled) {
     startBackgroundMusic();
     playTone(520, 0, .1, .035);
@@ -346,7 +352,7 @@ function startBackgroundMusic() {
 
 function showWinScreen() {
   state.inputLocked = true;
-  els.winScore.textContent = `${objects.length} objects found`;
+  els.winScore.textContent = `Найдено предметов: ${objects.length}`;
   els.winModal.hidden = false;
   document.body.style.overflow = "hidden";
   playWinSound();
@@ -376,6 +382,6 @@ if (els.image.complete && els.image.naturalWidth) initGame();
 else {
   els.image.addEventListener("load", initGame, { once: true });
   els.image.addEventListener("error", () => {
-    els.loading.textContent = "The picture could not be loaded. Check assets/scene.png";
+    els.loading.textContent = "Не удалось загрузить картинку. Проверьте файл assets/scene.png";
   }, { once: true });
 }
